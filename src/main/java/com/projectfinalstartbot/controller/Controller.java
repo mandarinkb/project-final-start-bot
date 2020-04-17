@@ -16,7 +16,7 @@ public class Controller {
     private ServiceWeb serviceWeb;
     
     @Scheduled(cron = "#{@cronExpression_1}") 
-    public void runTask_1() {   
+    public void start() {   
     	
         System.out.println(dateTimes.interDateTime() + " : start bot start");   
         serviceWeb.start();           

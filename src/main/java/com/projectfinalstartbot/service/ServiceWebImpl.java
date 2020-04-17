@@ -29,16 +29,16 @@ public class ServiceWebImpl implements ServiceWeb {
         Jedis redis = rd.connect();
         //redis.del("startUrl");  // clear old    
        
-        String sql = "select * from Web where Web_status = 1";
+        String sql = "select * from WEB where WEB_STATUS = 1";
         try {
             Connection conn = db.connectDatase();
             ResultSet result = db.getResultSet(conn, sql);
             while (result.next()) {
-                json.put("web_id", result.getInt("Web_id"));
-                json.put("web_name", result.getString("Web_name"));
-                json.put("url", result.getString("Url"));
-                json.put("web_status", result.getString("web_status"));
-                json.put("icon_url", result.getString("Icon_url"));
+                json.put("web_id", result.getInt("Web_ID"));
+                json.put("web_name", result.getString("WEB_NAME"));
+                json.put("url", result.getString("WEB_URL"));
+                json.put("web_status", result.getString("WEB_STATUS"));
+                json.put("icon_url", result.getString("ICON_URL"));
                 redis.rpush("startUrl", json.toString());
             }
             conn.close();
