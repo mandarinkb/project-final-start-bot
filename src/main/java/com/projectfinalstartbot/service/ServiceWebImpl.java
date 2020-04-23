@@ -11,11 +11,22 @@ import org.springframework.stereotype.Service;
 
 import com.projectfinalstartbot.dao.Database;
 import com.projectfinalstartbot.dao.Redis;
+import com.projectfinalstartbot.function.Elasticsearch;
+import com.projectfinalstartbot.function.Query;
+import com.projectfinalstartbot.function.SwitchDatabase;
 
 import redis.clients.jedis.Jedis;
 
 @Service
 public class ServiceWebImpl implements ServiceWeb {
+	@Autowired
+	private Query q;
+	
+    @Autowired
+    private SwitchDatabase swdb;
+    
+	@Autowired
+	private Elasticsearch elas;
 
     @Autowired
     private Database db;
@@ -27,8 +38,19 @@ public class ServiceWebImpl implements ServiceWeb {
     public void start() {
         JSONObject json = new JSONObject();
         Jedis redis = rd.connect();
-        //redis.del("startUrl");  // clear old    
-       
+        
+        //clear old redis
+        redis.del("startUrl");   
+        redis.del("categoryUrl"); 
+        redis.del("detailUrl"); 
+        
+        // select database working and clear data in elasticsearch
+        String dbName = q.StrExcuteQuery("select DATABASE_NAME from SWITCH_DATABASE where DATABASE_STATUS = '1' ");
+        elas.deleteIndex(dbName);
+        
+        //switch database
+        swdb.switchdb();
+        
         String sql = "select * from WEB where WEB_STATUS = 1";
         try {
             Connection conn = db.connectDatase();
