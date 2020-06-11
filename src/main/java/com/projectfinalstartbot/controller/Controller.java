@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import com.projectfinalstartbot.function.DateTimes;
+import com.projectfinalstartbot.function.Log;
 import com.projectfinalstartbot.service.ServiceWeb;
 
 @Component
 public class Controller {
+	@Autowired
+	private Log log;
 
     @Autowired
     private DateTimes dateTimes;
@@ -21,5 +24,6 @@ public class Controller {
         System.out.println(dateTimes.interDateTime() + " : start bot start");   
         serviceWeb.start();           
         System.out.println(dateTimes.interDateTime() + " : start bot stop");
+        log.createLog(dateTimes.timestamp(), "system", "start web scrapping", "start web scrapping");
     }
 }

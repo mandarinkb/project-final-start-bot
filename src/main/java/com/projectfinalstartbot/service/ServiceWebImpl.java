@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.projectfinalstartbot.dao.Database;
 import com.projectfinalstartbot.dao.Redis;
+import com.projectfinalstartbot.function.DateTimes;
 import com.projectfinalstartbot.function.Elasticsearch;
+import com.projectfinalstartbot.function.Log;
 import com.projectfinalstartbot.function.Query;
 import com.projectfinalstartbot.function.SwitchDatabase;
 
@@ -19,6 +21,12 @@ import redis.clients.jedis.Jedis;
 
 @Service
 public class ServiceWebImpl implements ServiceWeb {
+    @Autowired
+    private DateTimes dateTimes;
+    
+	@Autowired
+	private Log log;
+	
 	@Autowired
 	private Query q;
 	
@@ -43,13 +51,16 @@ public class ServiceWebImpl implements ServiceWeb {
         redis.del("startUrl");   
         redis.del("categoryUrl"); 
         redis.del("detailUrl"); 
+        log.createLog(dateTimes.timestamp(), "system", "clear data","clear data in redis");
         
         // select database working and clear data in elasticsearch
         String dbName = q.StrExcuteQuery("select DATABASE_NAME from SWITCH_DATABASE where DATABASE_STATUS = '1' ");
         elas.deleteIndex(dbName);
+        log.createLog(dateTimes.timestamp(), "system", "clear data","clear data in elasticsearch database");
         
         //switch database
         swdb.switchdb();
+        log.createLog(dateTimes.timestamp(), "system", "switch database","switch database in elasticsearch");
         
         String sql = "select * from WEB where WEB_STATUS = 1";
         try {
