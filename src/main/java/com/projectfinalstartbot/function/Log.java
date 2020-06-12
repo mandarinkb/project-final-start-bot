@@ -19,7 +19,7 @@ public class Log {
 	public void createLog(String timestamp ,String username, String type, String message ) {
 		JSONObject json = new JSONObject();
 		json.put("timestamp", timestamp);
-		json.put("userneme", username);
+		json.put("username", username);
 		json.put("type",type);
 		json.put("message", message);
         try {
