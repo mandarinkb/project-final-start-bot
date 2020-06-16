@@ -24,6 +24,6 @@ public class Controller {
         System.out.println(dateTimes.interDateTime() + " : start bot start");   
         serviceWeb.start();           
         System.out.println(dateTimes.interDateTime() + " : start bot stop");
-        log.createLog(dateTimes.timestamp(), "system", "start web scrapping", "start web scrapping");
+        log.createLog(dateTimes.datetime(),dateTimes.timestamp(), "system", "start web scrapping", "start web scrapping");
     }
 }

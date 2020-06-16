@@ -2,10 +2,15 @@
 FROM openjdk:8-jdk-alpine
 
 #change timezone
-RUN date
-RUN apk add tzdata
-RUN cp /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
-RUN date
+#RUN date
+#RUN apk add tzdata
+#RUN cp /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+#RUN date
+
+RUN date && \
+    apk add tzdata && \
+    cp /usr/share/zoneinfo/Asia/Bangkok /etc/localtime && \
+    date
 
 # Set volume point to /tmp
 VOLUME /tmp

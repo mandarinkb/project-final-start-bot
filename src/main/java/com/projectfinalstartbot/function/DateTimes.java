@@ -14,11 +14,16 @@ import org.springframework.stereotype.Service;
 public class DateTimes {
 
 	private static final DateTimeFormatter ts = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+	private static final DateTimeFormatter dt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");//yyyy/MM/dd HH:mm:ss
     private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");  //yyyy/MM/dd HH:mm:ss
 
     public String timestamp() {
     	return ZonedDateTime.now().format(ts);
+    }
+    
+    public String datetime() {
+    	return ZonedDateTime.now().format(dt);
     }
     
     public String interDateTime() {  //คศ + เวลา
