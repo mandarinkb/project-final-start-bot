@@ -18,7 +18,7 @@ public class Elasticsearch {
     
     public void deleteIndex(String index) {
         try {
-            HttpResponse<String> response = Unirest.delete(elasticsearch_ip+":9200/"+index)
+            HttpResponse<String> response = Unirest.delete(elasticsearch_ip+index)
                     .header("Accept", "*/*")
                     .header("cache-control", "no-cache")
                     .asString();
