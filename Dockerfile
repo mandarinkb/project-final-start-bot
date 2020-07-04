@@ -15,8 +15,8 @@ RUN date && \
 # Set volume point to /tmp
 VOLUME /tmp
 
-# Make port 8080 available to the world outside container
-EXPOSE 8080
+# Make port 8081 available to the world outside container
+EXPOSE 8081
 
 # Set application's JAR file
 ARG JAR_FILE=project-final-start-bot-0.0.1-SNAPSHOT.jar
