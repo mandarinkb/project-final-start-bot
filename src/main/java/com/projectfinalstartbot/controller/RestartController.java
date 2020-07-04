@@ -14,6 +14,7 @@ public class RestartController {
     @Autowired
     private RestartEndpoint restartEndpoint;
 
+    // เมื่อเรียก api นี้จะ restart service
     @PostMapping("/restart")
     public void restart() {
         Thread restartThread = new Thread(() -> restartEndpoint.restart());

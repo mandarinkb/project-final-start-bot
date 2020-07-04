@@ -19,7 +19,7 @@ public class ProjectFinalStartBotApplication {
 		SpringApplication.run(ProjectFinalStartBotApplication.class, args);
 	}
 	
-	
+	// ดึงข้อมูลมาเมื่อ service เริ่มทำงาน
     @Bean
     public String cronExpression_1() {
         return cron.cronExpressionTask_1();

@@ -15,6 +15,7 @@ public class Query {
     @Autowired
     private Database db;
 
+    // query ข้อมูลแล้วส่งค่า string กลับ (ส่งกลับแค่ค่าเดียว only one)
     public String StrExcuteQuery(String sql) {
         String str = "";
         List<String> columnNames = new ArrayList<String>();
@@ -42,6 +43,7 @@ public class Query {
         return str;
     }
 
+ // query ข้อมูลแล้วส่งค่า int กลับ (ส่งกลับแค่ค่าเดียว only one)
     public int IntExcuteQuery(String sql) {
         int returnIn = 0;
         List<String> columnNames = new ArrayList<String>();

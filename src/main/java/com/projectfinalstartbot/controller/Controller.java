@@ -18,9 +18,9 @@ public class Controller {
     @Autowired
     private ServiceWeb serviceWeb;
     
+    // ดึงข้อมูล cron expression จาก ProjectFinalStartBotApplication Class
     @Scheduled(cron = "#{@cronExpression_1}") 
-    public void start() {   
-    	
+    public void start() {       	
         System.out.println(dateTimes.interDateTime() + " : start bot start");   
         serviceWeb.start();           
         System.out.println(dateTimes.interDateTime() + " : start bot stop");

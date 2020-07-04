@@ -47,7 +47,7 @@ public class ServiceWebImpl implements ServiceWeb {
         JSONObject json = new JSONObject();
         Jedis redis = rd.connect();
         
-        //clear old redis
+        //clear old all redis
         redis.del("startUrl");   
         redis.del("categoryUrl"); 
         redis.del("detailUrl"); 

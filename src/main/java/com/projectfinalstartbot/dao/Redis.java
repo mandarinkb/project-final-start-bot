@@ -14,5 +14,4 @@ public class Redis {
        Jedis redis = new Jedis(redis_ip); 
        return redis;
     }
-    
 }
