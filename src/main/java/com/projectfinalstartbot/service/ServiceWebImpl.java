@@ -53,15 +53,16 @@ public class ServiceWebImpl implements ServiceWeb {
         redis.del("detailUrl"); 
         log.createLog(dateTimes.datetime(),dateTimes.timestamp(), "system", "clear data","clear data in redis");
         
-        // select database working and clear data in elasticsearch
-        String dbName = q.StrExcuteQuery("select DATABASE_NAME from SWITCH_DATABASE where DATABASE_STATUS = '1' ");
-        elas.deleteIndex(dbName);
-        log.createLog(dateTimes.datetime(),dateTimes.timestamp(), "system", "clear data","clear data in elasticsearch database");
-        
         //switch database
         swdb.switchdb();
         log.createLog(dateTimes.datetime(),dateTimes.timestamp(), "system", "switch database","switch database in elasticsearch");
         
+        // select database working and clear data in elasticsearch
+        String dbName = q.StrExcuteQuery("select DATABASE_NAME from SWITCH_DATABASE where DATABASE_STATUS = '0' ");
+        elas.deleteIndex(dbName);
+        log.createLog(dateTimes.datetime(),dateTimes.timestamp(), "system", "clear data","clear data in elasticsearch database");
+        
+
         String sql = "select * from WEB where WEB_STATUS = 1";
         try {
             Connection conn = db.connectDatase();
